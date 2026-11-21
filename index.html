@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rezki — Security Researcher & Bug Bounty Hunter</title>
+<meta name="description" content="Rezki — independent security researcher and bug bounty hunter based in Jakarta, Indonesia.">
+<meta name="color-scheme" content="dark">
+<style>
+:root{
+  --bg:#0b0a08; --bg-2:#100e0b; --panel:#141109; --line:rgba(240,235,225,.12);
+  --ink:#ece6db; --dim:#9a9184; --accent:#ff6a2b; --accent-2:#ff9a5c; --ok:#7fd39a;
+  --font-mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  --font-serif:Georgia,"Iowan Old Style","Palatino Linotype","Times New Roman",serif;
+  --font-sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --sp-1:.5rem; --sp-2:1rem; --sp-3:1.5rem; --sp-4:2.5rem; --sp-5:4rem; --sp-6:6rem;
+  --maxw:1200px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-sans);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+::selection{background:var(--accent);color:#120a04}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(1.1rem,4vw,3rem)}
+section{padding:clamp(3.5rem,8vw,6.5rem) 0;border-top:1px solid var(--line);scroll-margin-top:5rem}
+.kicker{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-2)}
+.h2{font-family:var(--font-serif);font-weight:400;font-size:clamp(1.9rem,4.2vw,3.1rem);line-height:1.05;letter-spacing:-.01em;margin:.5rem 0 1.4rem}
+.skip{position:absolute;left:-999px;top:0;background:var(--accent);color:#120a04;padding:.6rem 1rem;font-family:var(--font-mono);z-index:100}
+.skip:focus{left:0}
+:where(a,button):focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+/* header */
+.site{position:sticky;top:0;z-index:50;background:rgba(11,10,8,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.85rem clamp(1.1rem,4vw,3rem);max-width:var(--maxw);margin:0 auto}
+.brand{font-family:var(--font-serif);font-size:1.35rem;letter-spacing:.02em;text-decoration:none}
+.brand span{color:var(--accent)}
+.status{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);white-space:nowrap}
+.dot{width:.55rem;height:.55rem;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 rgba(127,211,154,.6);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(127,211,154,.55)}70%{box-shadow:0 0 0 7px rgba(127,211,154,0)}100%{box-shadow:0 0 0 0 rgba(127,211,154,0)}}
+.nav{display:flex;gap:1.4rem}
+.nav a{font-family:var(--font-mono);font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;color:var(--dim);padding:.25rem 0;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+.nav a:hover{color:var(--ink)}
+.nav a.active{color:var(--accent);border-bottom-color:var(--accent)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;border-top:none;padding:clamp(4rem,11vw,8rem) 0}
+.hero::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(120% 80% at 82% 12%,rgba(255,106,43,.18),transparent 58%),
+  radial-gradient(90% 70% at 8% 92%,rgba(255,154,92,.08),transparent 60%);pointer-events:none}
+.hero .wrap{position:relative}
+.hero-title{font-family:var(--font-serif);font-weight:400;font-size:clamp(2.7rem,9vw,7rem);line-height:.98;letter-spacing:-.02em;margin:1.1rem 0 1.5rem;max-width:15ch}
+.hero-title em{font-style:italic;color:var(--accent)}
+.hero-sub{max-width:44ch;color:var(--dim);font-size:clamp(1rem,1.6vw,1.2rem)}
+.hero-links{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:2.2rem}
+.btn{font-family:var(--font-mono);font-size:.8rem;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;padding:.85rem 1.3rem;border:1px solid var(--line);border-radius:3px;color:var(--ink);display:inline-flex;align-items:center;gap:.5rem;transition:background .2s,color .2s,border-color .2s,transform .2s}
+.btn:hover{background:var(--accent);color:#120a04;border-color:var(--accent);transform:translateY(-2px)}
+.btn.ghost{background:transparent}
+
+/* about */
+.about-grid{display:grid;gap:2.5rem}
+.about-p{max-width:52ch;font-size:clamp(1.05rem,1.8vw,1.35rem);color:var(--ink);line-height:1.7}
+.stats{display:grid;grid-template-columns:1fr;gap:1.5rem;border-top:1px solid var(--line);padding-top:1.5rem}
+.stat b{display:block;font-family:var(--font-serif);font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;color:var(--accent);letter-spacing:-.02em}
+.stat span{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-top:.5rem;display:block}
+
+/* work */
+.cards{display:grid;grid-template-columns:1fr;gap:1.1rem;margin-top:2rem}
+.card{position:relative;background:linear-gradient(180deg,var(--panel),var(--bg-2));border:1px solid var(--line);border-radius:5px;padding:1.5rem;overflow:hidden;transition:transform .25s,border-color .25s}
+.card::before{content:"";position:absolute;left:0;top:0;height:2px;width:0;background:var(--accent);transition:width .35s}
+.card:hover{transform:translateY(-4px);border-color:rgba(255,106,43,.5)}
+.card:hover::before{width:100%}
+.card-top{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.card-top .cat{color:var(--accent-2)}
+.card h3{font-family:var(--font-serif);font-weight:400;font-size:1.35rem;line-height:1.2;margin:.9rem 0 .6rem}
+.card p{color:var(--dim);font-size:.95rem}
+.more{margin-top:2.2rem;padding-top:1.4rem;border-top:1px solid var(--line);font-family:var(--font-mono);font-size:.72rem;letter-spacing:.03em;line-height:2;color:var(--dim)}
+.net-sub{color:var(--dim);max-width:52ch;margin-bottom:1.6rem}
+.chips{list-style:none;display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.5rem}
+.chip{font-family:var(--font-mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);border:1px solid var(--line);border-radius:4px;padding:.55rem .95rem;background:linear-gradient(180deg,var(--panel),var(--bg-2));transition:border-color .25s,color .25s,transform .25s}
+.chip:hover{border-color:var(--accent);color:var(--accent-2);transform:translateY(-2px)}
+
+/* approach */
+.approach-grid{display:grid;grid-template-columns:1fr;gap:2rem;margin-top:1.5rem}
+.approach-grid article{border-top:2px solid var(--accent);padding-top:1.1rem}
+.approach-grid h3{font-family:var(--font-serif);font-weight:400;font-size:1.5rem;margin-bottom:.6rem}
+.approach-grid p{color:var(--dim);font-size:.95rem;max-width:40ch}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding:clamp(3rem,7vw,5rem) 0}
+.contact h2{font-family:var(--font-serif);font-weight:400;font-size:clamp(2rem,5vw,3.4rem);line-height:1.05;letter-spacing:-.01em;margin:.5rem 0 1.6rem;max-width:16ch}
+.mail{display:inline-flex;align-items:center;gap:.7rem;font-family:var(--font-mono);font-size:clamp(.95rem,2.4vw,1.25rem);text-decoration:none;color:var(--ink);border-bottom:1px solid var(--accent);padding-bottom:.2rem;transition:color .2s}
+.mail:hover{color:var(--accent)}
+.copy{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;background:transparent;border:1px solid var(--line);color:var(--dim);padding:.5rem .8rem;border-radius:3px;cursor:pointer;transition:color .2s,border-color .2s,background .2s}
+.copy:hover{color:var(--accent);border-color:var(--accent)}
+.copy.done{color:var(--ok);border-color:var(--ok)}
+.note{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.08em;color:var(--dim);margin-top:1.4rem}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--line);font-family:var(--font-mono);font-size:.7rem;letter-spacing:.08em;color:var(--dim)}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media (min-width:700px){
+  .about-grid{grid-template-columns:1.1fr 1fr;align-items:start}
+  .stats{grid-template-columns:repeat(3,1fr);border-top:none;padding-top:0}
+  .stat{border-left:1px solid var(--line);padding-left:1.2rem}
+  .stat:first-child{border-left:none;padding-left:0}
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .approach-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media (min-width:1000px){
+  .cards{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:640px){
+  .bar{flex-wrap:wrap;gap:.55rem 1rem}
+  .status{display:none}
+  .nav{width:100%;justify-content:space-between;gap:.35rem;border-top:1px solid var(--line);padding-top:.6rem}
+  .nav a{font-size:.68rem;letter-spacing:0}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none;transition:none}
+  .dot{animation:none}
+  .btn,.card,.nav a,.mail,.copy,.chip{transition:none}
+}
+</style>
+<noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site">
+  <div class="bar">
+    <a class="brand" href="#top" aria-label="Rezki, home">Rezki<span>.</span></a>
+    <span class="status"><span class="dot" aria-hidden="true"></span>Available for engagements</span>
+    <nav class="nav" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#networks">Networks</a>
+      <a href="#approach">Approach</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" id="top" aria-label="Introduction">
+    <div class="wrap">
+      <p class="kicker">Security Researcher &amp; Bug Bounty Hunter — Jakarta, ID</p>
+      <h1 class="hero-title">I find the bugs that <em>matter.</em></h1>
+      <p class="hero-sub">Independent security researcher across web apps, smart contracts, and blockchain testnets.</p>
+      <div class="hero-links">
+        <a class="btn" href="#work">View selected work</a>
+        <a class="btn ghost" href="#contact">Get in touch</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" aria-labelledby="about-h">
+    <div class="wrap about-grid">
+      <div class="reveal">
+        <p class="kicker">About</p>
+        <h2 class="h2" id="about-h">Impact over volume.</h2>
+        <p class="about-p">I hunt vulnerabilities that change real outcomes, not the ones that just look scary in a report. My work favors deep, chained findings over surface-level noise. Every disclosure ships with a reproducible proof and a clear path to a fix.</p>
+      </div>
+      <div class="stats reveal">
+        <div class="stat"><b>110+</b><span>reports filed</span></div>
+        <div class="stat"><b>58</b><span>distinct targets</span></div>
+        <div class="stat"><b>13</b><span>testnets validated</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work" aria-labelledby="work-h">
+    <div class="wrap">
+      <p class="kicker">Selected Work</p>
+      <h2 class="h2" id="work-h">Selected Work</h2>
+      <div class="cards">
+        <article class="card reveal"><div class="card-top"><span class="cat">Bug bounty / Web</span><span>2026</span></div><h3>T-Mobile CZ</h3><p>Multi-round program engagement: 9 findings across auth, API and configuration surfaces, tracked end-to-end through the program's ticketing.</p></article>
+        <article class="card reveal"><div class="card-top"><span class="cat">Web3 / Protocol</span><span>2026</span></div><h3>Vana — Data Portability</h3><p>15 findings on a data-portability estate, 4 High, spanning gateway authentication, registry writes and role management. Responded to by the dev team.</p></article>
+        <article class="card reveal"><div class="card-top"><span class="cat">CVD / Payments</span><span>2026</span></div><h3>Bancontact</h3><p>6 findings on the payments estate, filed under the NCSC coordinated-disclosure scheme. Intake confirmed and tracked in vendor Jira (ref IDS-2924).</p></article>
+        <article class="card reveal"><div class="card-top"><span class="cat">Smart Contracts</span><span>2026</span></div><h3>Shift DeFi</h3><p>5 findings on cross-chain message authentication and bridge adapters, each delivered with a pinned-block mainnet-fork proof of concept.</p></article>
+        <article class="card reveal"><div class="card-top"><span class="cat">Payments / VDP</span><span>2026</span></div><h3>eWAY / GlobalPay</h3><p>4 Low findings across the payments estate; ticketed by the security team (ref #1434) and replied to in-thread.</p></article>
+        <article class="card reveal"><div class="card-top"><span class="cat">Web3 / Multi</span><span>2026</span></div><h3>Qore Network</h3><p>Three audit reports — authorization, post-quantum, and bridge — shipped together with an executable PoC pack.</p></article>
+      </div>
+      <p class="more reveal">Also filed on: Lavanet · Stable.com · Red Dot Pay · Eurobase · EveDEX · Templar Protocol · Pyron · Arcus · CloudBet · GG Poker · Xiaomi · Atomic Wallet · RootData · Fintual · Kameo · SwapBee · Magma Finance · BlockBee · Bitvavo · Arrakis · Lit Protocol · Daemon · Velocity · Moneykit · Turnkey · Rampa · A8Core · SatRush · ExponentLabs · Range.org · CleanShot · FluidTokens · Idura · Quarterwise · Val Town · XTRM · Aktionariat · Tori Finance · EFP · FlatScout · Paraspell</p>
+    </div>
+  </section>
+
+  <section id="networks" aria-labelledby="networks-h">
+    <div class="wrap">
+      <p class="kicker">Validator</p>
+      <h2 class="h2" id="networks-h">Networks Validated</h2>
+      <p class="net-sub">Operated validator nodes across 13 testnet / devnet ecosystems — protocol internals, consensus behavior and node operations, first-hand.</p>
+      <ul class="chips reveal" aria-label="Testnets validated">
+        <li class="chip">Osmosis</li>
+        <li class="chip">Wormhole</li>
+        <li class="chip">Pyth</li>
+        <li class="chip">Aptos</li>
+        <li class="chip">Jito</li>
+        <li class="chip">Sei</li>
+        <li class="chip">Celestia</li>
+        <li class="chip">Dymension</li>
+        <li class="chip">Avail</li>
+        <li class="chip">OverProtocol</li>
+        <li class="chip">Berachain</li>
+        <li class="chip">Initia</li>
+        <li class="chip">Paxi</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="approach" aria-labelledby="approach-h">
+    <div class="wrap">
+      <p class="kicker">Approach</p>
+      <h2 class="h2" id="approach-h">How I work</h2>
+      <div class="approach-grid">
+        <article class="reveal"><h3>Understand before testing</h3><p>Map the business logic and threat model first, so the probes target what actually breaks.</p></article>
+        <article class="reveal"><h3>Proof over prose</h3><p>Every claim ships with a reproducible PoC — a payload, a trace, or a diff — not just a description.</p></article>
+        <article class="reveal"><h3>Severity without theatre</h3><p>Honest CVSS, no inflated ratings. A clear fix beats a scary number.</p></article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="contact" aria-labelledby="contact-h">
+  <div class="wrap contact">
+    <p class="kicker">Contact</p>
+    <h2 id="contact-h">Have a target worth looking at?</h2>
+    <a class="mail" href="mailto:gurki2901@gmail.com">gurki2901@gmail.com</a>
+    <button class="copy" type="button" data-email="gurki2901@gmail.com" aria-label="Copy email address to clipboard">Copy</button>
+    <p class="note">PGP key available on request.</p>
+    <div class="foot">
+      <span>© 2026 Rezki — Jakarta, Indonesia</span>
+      <span>Independent security research</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var els = document.querySelectorAll(".reveal");
+  if (reduce || !("IntersectionObserver" in window)) {
+    els.forEach(function(e){ e.classList.add("in"); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
+    els.forEach(function(e){ io.observe(e); });
+    // Safety net: never leave content invisible if the observer misbehaves.
+    setTimeout(function(){ els.forEach(function(e){ e.classList.add("in"); }); }, 2500);
+  }
+
+  var links = Array.prototype.slice.call(document.querySelectorAll(".nav a"));
+  var map = {};
+  links.forEach(function(a){ map[a.getAttribute("href").slice(1)] = a; });
+  var secs = Object.keys(map).map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  if ("IntersectionObserver" in window) {
+    var nav = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting) {
+          links.forEach(function(l){ l.classList.remove("active"); });
+          var a = map[en.target.id];
+          if (a) a.classList.add("active");
+        }
+      });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+    secs.forEach(function(s){ nav.observe(s); });
+  }
+
+  var btn = document.querySelector(".copy");
+  if (btn) {
+    btn.addEventListener("click", function(){
+      var email = btn.getAttribute("data-email");
+      var done = function(){
+        btn.textContent = "Copied"; btn.classList.add("done");
+        setTimeout(function(){ btn.textContent = "Copy"; btn.classList.remove("done"); }, 1600);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).then(done, done);
+      } else { done(); }
+    });
+  }
+})();
+</script>
+</body>
+</html>
