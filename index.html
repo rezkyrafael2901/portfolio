@@ -73,6 +73,9 @@ section{padding:clamp(3.5rem,8vw,6.5rem) 0;border-top:1px solid var(--line);scro
 .card-top .cat{color:var(--accent-2)}
 .card h3{font-family:var(--font-serif);font-weight:400;font-size:1.35rem;line-height:1.2;margin:.9rem 0 .6rem}
 .card p{color:var(--dim);font-size:.95rem}
+.card-link{margin-top:.9rem}
+.card-link a{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.05em;color:var(--accent-2);text-decoration:none;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+.card-link a:hover{color:var(--accent);border-bottom-color:var(--accent)}
 .more{margin-top:2.2rem;padding-top:1.4rem;border-top:1px solid var(--line);font-family:var(--font-mono);font-size:.72rem;letter-spacing:.03em;line-height:2;color:var(--dim)}
 .net-sub{color:var(--dim);max-width:52ch;margin-bottom:1.6rem}
 .chips{list-style:none;display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.5rem}
@@ -121,7 +124,7 @@ footer{border-top:1px solid var(--line);padding:clamp(3rem,7vw,5rem) 0}
   html{scroll-behavior:auto}
   .reveal{opacity:1;transform:none;transition:none}
   .dot{animation:none}
-  .btn,.card,.nav a,.mail,.copy,.chip{transition:none}
+  .btn,.card,.nav a,.mail,.copy,.chip,.card-link a{transition:none}
 }
 </style>
 <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
@@ -193,8 +196,8 @@ footer{border-top:1px solid var(--line);padding:clamp(3rem,7vw,5rem) 0}
       <p class="kicker">Projects</p>
       <h2 class="h2" id="projects-h">Projects I've shipped</h2>
       <div class="cards">
-        <article class="card reveal"><div class="card-top"><span class="cat">Web Dev / Vana</span><span>2026</span></div><h3>Nodea — Multi-Source Identity Card</h3><p>Built for Vana Cup 2026 (builders.vana.org). Connects six-plus data sources — GitHub, Spotify, Steam, ChatGPT, YouTube, Instagram — through Vana's data portability protocol and compiles them into an AI-analyzed identity profile with a shareable visual card. Next.js 16, Vana SDK, deployed on Vercel.</p></article>
-        <article class="card reveal"><div class="card-top"><span class="cat">Infrastructure / LLM</span><span>2026</span></div><h3>VRouter — AI Gateway</h3><p>OpenAI-compatible multi-provider LLM router: provider combos, key rotation and cooldowns, per-model latency/error stats, live dashboard, and a public provider platform that issues API keys. Serves as the routing backbone for agent fleets across multiple VPS nodes.</p></article>
+        <article class="card reveal"><div class="card-top"><span class="cat">Web Dev / Vana</span><span>2026</span></div><h3>Nodea — Multi-Source Identity Card</h3><p>Built for Vana Cup 2026 (builders.vana.org). Connects six-plus data sources — GitHub, Spotify, Steam, ChatGPT, YouTube, Instagram — through Vana's data portability protocol and compiles them into an AI-analyzed identity profile with a shareable visual card. Next.js 16, Vana SDK, deployed on Vercel.</p><p class="card-link"><a href="https://nodea-v2.vercel.app" target="_blank" rel="noopener noreferrer">nodea-v2.vercel.app &#8599;</a></p></article>
+        <article class="card reveal"><div class="card-top"><span class="cat">Infrastructure / LLM</span><span>2026</span></div><h3>VRouter — AI Gateway</h3><p>OpenAI-compatible multi-provider LLM router: provider combos, key rotation and cooldowns, per-model latency/error stats, live dashboard, and a public provider platform that issues API keys. Serves as the routing backbone for agent fleets across multiple VPS nodes.</p><p class="card-link"><a href="https://console.vrouter.my.id" target="_blank" rel="noopener noreferrer">console.vrouter.my.id &#8599;</a></p></article>
       </div>
     </div>
   </section>
