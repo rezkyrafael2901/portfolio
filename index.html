@@ -114,7 +114,7 @@ footer{border-top:1px solid var(--line);padding:clamp(3rem,7vw,5rem) 0}
 @media (max-width:640px){
   .bar{flex-wrap:wrap;gap:.55rem 1rem}
   .status{display:none}
-  .nav{width:100%;justify-content:space-between;gap:.35rem;border-top:1px solid var(--line);padding-top:.6rem}
+  .nav{width:100%;display:flex;flex-wrap:wrap;justify-content:flex-start;gap:.4rem 1rem;border-top:1px solid var(--line);padding-top:.6rem}
   .nav a{font-size:.68rem;letter-spacing:0}
 }
 @media (prefers-reduced-motion:reduce){
@@ -136,6 +136,7 @@ footer{border-top:1px solid var(--line);padding:clamp(3rem,7vw,5rem) 0}
     <nav class="nav" aria-label="Primary">
       <a href="#about">About</a>
       <a href="#work">Work</a>
+      <a href="#projects">Projects</a>
       <a href="#networks">Networks</a>
       <a href="#approach">Approach</a>
       <a href="#contact">Contact</a>
@@ -184,6 +185,17 @@ footer{border-top:1px solid var(--line);padding:clamp(3rem,7vw,5rem) 0}
         <article class="card reveal"><div class="card-top"><span class="cat">Web3 / Multi</span><span>2026</span></div><h3>Qore Network</h3><p>Three audit reports — authorization, post-quantum, and bridge — shipped together with an executable PoC pack.</p></article>
       </div>
       <p class="more reveal">Also filed on: Lavanet · Stable.com · Red Dot Pay · Eurobase · EveDEX · Templar Protocol · Pyron · Arcus · CloudBet · GG Poker · Xiaomi · Atomic Wallet · RootData · Fintual · Kameo · SwapBee · Magma Finance · BlockBee · Bitvavo · Arrakis · Lit Protocol · Daemon · Velocity · Moneykit · Turnkey · Rampa · A8Core · SatRush · ExponentLabs · Range.org · CleanShot · FluidTokens · Idura · Quarterwise · Val Town · XTRM · Aktionariat · Tori Finance · EFP · FlatScout · Paraspell</p>
+    </div>
+  </section>
+
+  <section id="projects" aria-labelledby="projects-h">
+    <div class="wrap">
+      <p class="kicker">Projects</p>
+      <h2 class="h2" id="projects-h">Projects I've shipped</h2>
+      <div class="cards">
+        <article class="card reveal"><div class="card-top"><span class="cat">Web Dev / Vana</span><span>2026</span></div><h3>Nodea — Multi-Source Identity Card</h3><p>Built for Vana Cup 2026 (builders.vana.org). Connects six-plus data sources — GitHub, Spotify, Steam, ChatGPT, YouTube, Instagram — through Vana's data portability protocol and compiles them into an AI-analyzed identity profile with a shareable visual card. Next.js 16, Vana SDK, deployed on Vercel.</p></article>
+        <article class="card reveal"><div class="card-top"><span class="cat">Infrastructure / LLM</span><span>2026</span></div><h3>VRouter — AI Gateway</h3><p>OpenAI-compatible multi-provider LLM router: provider combos, key rotation and cooldowns, per-model latency/error stats, live dashboard, and a public provider platform that issues API keys. Serves as the routing backbone for agent fleets across multiple VPS nodes.</p></article>
+      </div>
     </div>
   </section>
 
