@@ -7,10 +7,10 @@ requests: hand-written CSS, vanilla JS, zero network calls at runtime.
 
 ## Deploy
 
-Static site — any host works. Deployed to Vercel (project: `portfolio`):
+Static site — any host works. Deployed on Vercel (team **Rezki's projects**, project `rezki-portfolio`):
 
-- Vercel CLI: `vercel deploy --prod`
-- Vercel API: upload `index.html` as the sole file
+- Live URL: **https://rezki-portfolio.vercel.app**
+- Vercel API: `POST /v13/deployments` with `files:[{file:"/index.html", data:<raw>}]` and `projectSettings:{outputDirectory:"."}` (raw text, NOT base64)
 
 ## Contents
 
